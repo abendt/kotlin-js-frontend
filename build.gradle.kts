@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.frontend.npm.NpmExtension
 import org.jetbrains.kotlin.gradle.frontend.util.frontendExtension
 import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackExtension
 import org.jetbrains.kotlin.gradle.plugin.Kotlin2JsPluginWrapper
+import org.jetbrains.kotlin.gradle.tasks.KotlinJsDce
 
 buildscript {
     repositories {
@@ -26,6 +27,7 @@ plugins {
 
 apply {
     plugin("org.jetbrains.kotlin.frontend")
+    plugin("kotlin-dce-js")
 }
 
 repositories {
@@ -39,6 +41,8 @@ dependencies {
 
 configure<KotlinFrontendExtension> {
     downloadNodeJsVersion = "8.9.3"
+
+    define("PRODUCTION", true)
 
     configure<NpmExtension> {
         devDependency("kotlin-test", "1.2.31")
@@ -57,7 +61,7 @@ configure<KotlinFrontendExtension> {
         browsers = mutableListOf("ChromeHeadless")
         plugins = mutableListOf("karma-mocha-reporter", "karma-es6-shim", "karma-chrome-launcher")
         reporters = mutableListOf("mocha")
-        frameworks = mutableListOf("jasmine", "es6-shim") // for now only qunit works as intended
+        frameworks = mutableListOf("mocha", "es6-shim") // for now only qunit works as intended
     }
 
     bundle<WebPackExtension>("webpack") {
@@ -94,6 +98,18 @@ tasks {
         kotlinOptions.sourceMapEmbedSources = "always"
         kotlinOptions.moduleKind = "commonjs"
         kotlinOptions.main = "call"
+    }
+
+    val runDceTestKotlinJs by getting(KotlinJsDce::class) {
+        dceOptions {
+            devMode = true
+        }
+    }
+
+    val runDceKotlinJs by getting(KotlinJsDce::class) {
+        dceOptions {
+            devMode = false
+        }
     }
 }
 
