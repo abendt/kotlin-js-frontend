@@ -1,5 +1,5 @@
 if (defined.PRODUCTION) {
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+    const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
     console.log("Production build is enabled!");
 
