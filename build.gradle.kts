@@ -42,6 +42,8 @@ dependencies {
 configure<KotlinFrontendExtension> {
     downloadNodeJsVersion = "8.9.3"
 
+    sourceMaps = true
+
     define("PRODUCTION", true)
 
     configure<NpmExtension> {
