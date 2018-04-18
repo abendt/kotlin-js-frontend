@@ -2,7 +2,7 @@
 
 Sample usage of the kotlin-frontend-plugin (Kotlin DSL)
 
-Run:
-./gradlew run
+Build: 	`./gradlew build`
+Run: 	`./gradlew run`
 
 open http://localhost:3000
