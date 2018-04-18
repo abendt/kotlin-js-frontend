@@ -36,7 +36,7 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib-js"))
-    testCompile(kotlin("test-js"))
+    compile(kotlin("test-js"))
 }
 
 configure<KotlinFrontendExtension> {
@@ -44,10 +44,10 @@ configure<KotlinFrontendExtension> {
 
     sourceMaps = true
 
-    define("PRODUCTION", true)
+   define("PRODUCTION", false)
 
     configure<NpmExtension> {
-        devDependency("kotlin-test", "1.2.31")
+       // devDependency("kotlin-test", "1.2.31")
         devDependency("karma")
 
         // karma plugins
