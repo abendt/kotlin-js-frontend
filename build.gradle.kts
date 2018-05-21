@@ -45,10 +45,10 @@ configure<KotlinFrontendExtension> {
 
     sourceMaps = true
 
-   define("PRODUCTION", true)
+    define("PRODUCTION", true)
 
     configure<NpmExtension> {
-       // devDependency("kotlin-test", "1.2.31")
+        // devDependency("kotlin-test", "1.2.31")
         devDependency("karma")
 
         // karma plugins
@@ -116,8 +116,8 @@ tasks {
     }
 }
 
-project.afterEvaluate{
+project.afterEvaluate {
     val `karma-run-single` by tasks.getting {
-        inputs.file(testJsOutputFile)
+        outputs.upToDateWhen { false }
     }
 }
