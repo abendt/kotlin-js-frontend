@@ -13,16 +13,17 @@ buildscript {
         maven {
             setUrl("https://dl.bintray.com/kotlin/kotlin-eap")
         }
+        mavenLocal()
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.31")
-        classpath("org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.30")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.41")
+        classpath("org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.31")
     }
 }
 
 plugins {
-    kotlin("platform.js") version "1.2.31"
+    kotlin("platform.js") version "1.2.41"
 }
 
 apply {
@@ -36,7 +37,7 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib-js"))
-    compile(kotlin("test-js"))
+    testCompile(kotlin("test-js"))
 }
 
 configure<KotlinFrontendExtension> {
@@ -44,7 +45,7 @@ configure<KotlinFrontendExtension> {
 
     sourceMaps = true
 
-   define("PRODUCTION", false)
+   define("PRODUCTION", true)
 
     configure<NpmExtension> {
        // devDependency("kotlin-test", "1.2.31")
