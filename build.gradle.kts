@@ -17,13 +17,13 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.41")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.50")
         classpath("org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.31")
     }
 }
 
 plugins {
-    kotlin("platform.js") version "1.2.41"
+    kotlin("platform.js") version "1.2.50"
 }
 
 apply {
@@ -45,10 +45,10 @@ configure<KotlinFrontendExtension> {
 
     sourceMaps = true
 
-    define("PRODUCTION", true)
+   define("PRODUCTION", false)
 
     configure<NpmExtension> {
-        // devDependency("kotlin-test", "1.2.31")
+       // devDependency("kotlin-test", "1.2.31")
         devDependency("karma")
 
         // karma plugins
@@ -118,6 +118,6 @@ tasks {
 
 project.afterEvaluate {
     val `karma-run-single` by tasks.getting {
-        outputs.upToDateWhen { false }
+        inputs.file(testJsOutputFile)
     }
 }
